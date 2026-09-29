@@ -118,10 +118,6 @@ git push --tags
 
 The PDF appears under **Releases**. It always contains dummy data, since `data.tex` never reaches GitHub.
 
-### GitHub Free plan
-
-This works on the free plan. Private repositories include 2,000 Linux Actions minutes per month; a letter build takes roughly 1–2 minutes. Keep `runs-on: ubuntu-latest`, because Windows and macOS runners use up included minutes 2× and 10× faster. Releases in private repositories are only visible to you and your collaborators.
-
 ## Privacy notes
 
 - **Private repos are not end-to-end encrypted.** GitHub (Microsoft) treats them as confidential and only accesses them for support with your consent, for security, or when legally required, but it holds the keys.
@@ -137,20 +133,3 @@ This works on the free plan. Private repositories include 2,000 Linux Actions mi
 - For German letters, the KOMA-Script class `scrlttr2` handles DIN-compliant address fields and folding marks. It is included in the TeX Live image used by the workflow.
 - Put a scanned signature in `signature.png` to have it printed above your name. Without it, the letter leaves space for a handwritten signature.
 - Run `git status` before every commit and make sure `data.tex` is not listed.
-
-## `.gitignore`
-
-```
-# Private data
-data.tex
-signature.png
-
-# LaTeX build files
-*.aux
-*.log
-*.out
-*.fls
-*.fdb_latexmk
-*.synctex.gz
-*.pdf
-```
