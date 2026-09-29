@@ -1,0 +1,12 @@
+# Private data
+data.tex
+signature.png
+
+# LaTeX build files
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.pdf

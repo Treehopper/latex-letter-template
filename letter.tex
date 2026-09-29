@@ -1,0 +1,76 @@
+% German letter (DIN 5008, A4) using KOMA-Script scrlttr2.
+% All personal data comes from macros; see data.example.tex.
+\documentclass[
+  paper=a4,
+  fontsize=11pt,
+  version=last,
+  foldmarks=true,
+  fromalign=right,
+  fromphone=true,
+  fromemail=true,
+  backaddress=true,
+  refline=dateleft,
+  firstfoot=true,
+  parskip=half,
+]{scrlttr2}
+
+\LoadLetterOption{DIN}
+
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{graphicx}
+
+% Real data first (if present), dummy data as fallback
+\InputIfFileExists{data.tex}{}{}
+\input{data.example.tex}
+
+% Absender
+\setkomavar{fromname}{\SenderName}
+\setkomavar{fromaddress}{\SenderAddress}
+\setkomavar{fromphone}{\SenderPhone}
+\setkomavar{fromemail}{\SenderEmail}
+
+% Bezugszeichenzeile
+\setkomavar{yourref}{\CaseNumber}
+\setkomavar{place}{\SenderCity}
+\setkomavar{date}{\LetterDate}
+
+% Unterschrift: signature.png (local only, ignored by Git) if present,
+% otherwise empty space for a handwritten signature
+\renewcommand*{\raggedsignature}{\raggedright}
+\IfFileExists{signature.png}{%
+  \setplength{sigbeforevskip}{0.5\baselineskip}%
+  \setkomavar{signature}{%
+    \includegraphics[height=1.5cm]{signature.png}\\\SenderName}%
+}{%
+  \setplength{sigbeforevskip}{3\baselineskip}%
+  \setkomavar{signature}{\SenderName}%
+}
+
+\setkomavar{subject}{Erstattung des Betrags von \Amount\,EUR}
+
+% Bankverbindung in der Fußzeile der ersten Seite
+\setkomavar{firstfoot}{%
+  \parbox[t]{\linewidth}{\centering\footnotesize
+    Bankverbindung: \BankName\\
+    IBAN: \IBAN\quad BIC: \BIC}}
+
+\begin{document}
+
+\begin{letter}{\RecipientName\\\RecipientAddress}
+
+\opening{Sehr geehrte Damen und Herren,}
+
+in der oben genannten Angelegenheit bitte ich Sie, den Betrag von
+\Amount\,EUR bis zum \DueDate{} auf das unten angegebene Konto zu
+überweisen.
+
+Für Rückfragen stehe ich Ihnen gerne zur Verfügung.
+
+\closing{Mit freundlichen Grüßen}
+
+\end{letter}
+
+\end{document}
