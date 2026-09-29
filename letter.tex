@@ -10,7 +10,6 @@
   fromemail=true,
   backaddress=true,
   refline=dateleft,
-  firstfoot=true,
   parskip=half,
 ]{scrlttr2}
 
@@ -33,7 +32,6 @@
 \setkomavar{fromemail}{\SenderEmail}
 
 % Bezugszeichenzeile
-\setkomavar{yourref}{\CaseNumber}
 \setkomavar{place}{\SenderCity}
 \setkomavar{date}{\LetterDate}
 
@@ -51,12 +49,6 @@
 
 \setkomavar{subject}{Erstattung des Betrags von \Amount\,EUR}
 
-% Bankverbindung in der Fußzeile der ersten Seite
-\setkomavar{firstfoot}{%
-  \parbox[t]{\linewidth}{\centering\footnotesize
-    Bankverbindung: \BankName\\
-    IBAN: \IBAN\quad BIC: \BIC}}
-
 \begin{document}
 
 \begin{letter}{\RecipientName\\\RecipientAddress}
@@ -64,8 +56,13 @@
 \opening{Sehr geehrte Damen und Herren,}
 
 in der oben genannten Angelegenheit bitte ich Sie, den Betrag von
-\Amount\,EUR bis zum \DueDate{} auf das unten angegebene Konto zu
-überweisen.
+\Amount\,EUR bis zum \DueDate{} auf folgendes Konto zu überweisen:
+
+\begin{tabular}{@{}ll@{}}
+  Bank: & \BankName \\
+  IBAN: & \IBAN \\
+  BIC:  & \BIC
+\end{tabular}
 
 Für Rückfragen stehe ich Ihnen gerne zur Verfügung.
 
